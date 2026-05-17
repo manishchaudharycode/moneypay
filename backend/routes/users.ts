@@ -1,94 +1,69 @@
 import { Router } from "express";
 import { signinValidation, signupValidation } from "../validation";
 import bcrypt from "bcryptjs";
-import jwt, { verify } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { prisma, secret } from "../config/config";
+import { authMiddleware } from "../middleware/userMiddleware";
 
 const userRouter = Router();
 
-// userRouter.use("/", async (req, res, next) => {
-//   const path = req.url;
-//   if (path.includes("/signup") || path.includes("/signin")) {
-//     return next();
-//   }
-//   const token = req.header("authorization") || "";
-//   if (!token) {
-//     return res.status(403).json({
-//       msg: "token required",
-//     });
-//   }
-
-//   try {
-//     const user = verify(token, secret) as { id: string };
-//     if (user) {
-//       res.set("userId", user.id);
-//       next();
-//     }
-//   } catch (error) {
-//     return res.status(500).json({
-//       success: false,
-//       message: "Invalid or expired token ",
-//     });
-//   }
-// });
-
 userRouter.post("/signup", async (req, res) => {
-  try {
-    const { email, name, password } = req.body;
-    const validation = signupValidation.safeParse({ email, password, name });
-    if (!validation.success) {
-      return res.status(400).json({
-        success: false,
-        message: "validation error",
-        error: validation.error,
-      });
-    }
+  const { email, name, password } = req.body;
 
-    const userExist = await prisma.user.findUnique({
-      where: { email },
-      select: {
-        email: true,
-        id: true,
-        name: true,
-      },
-    });
-    if (userExist) {
-      return res.status(409).json({
-        success: false,
-        message: "user already exists",
-      });
-    }
+  // console.log(password)
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await prisma.user.create({
-      data: {
-        email,
-        password: hashedPassword,
-        name,
-      },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-      },
-    });
-
-    const data = { id: user.id, email: user.email, name: user.name };
-    const token = await jwt.sign(data, secret as string, {
-      expiresIn: "1d",
-    });
-    return res.status(201).json({
-      success: true,
-      message: "user created successfully",
-      user,
-      token,
-    });
-  } catch (error) {
-    return res.status(500).json({
+  const validation = signupValidation.safeParse({ email, password, name });
+  if (!validation.success) {
+    return res.status(400).json({
       success: false,
-      message: "server error during  user creation",
+      message: "validation error",
+      error: validation.error,
     });
   }
+  console.log(validation)
+  const userExist = await prisma.user.findUnique({
+    where: { email: email },
+    select: {
+      email: true,
+      id: true,
+      name: true,
+    },
+  });
+  if (userExist) {
+    return res.status(409).json({
+      success: false,
+      message: "user already exists",
+    });
+  }
+  // console.log(userExist);
+  const hashedPassword = await bcrypt.hash(password, 10);
+  console.log(hashedPassword)
+
+  const user = await prisma.user.create({
+    data: {
+      email,
+      password: hashedPassword,
+      name
+    },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+    },
+  });
+  console.log(user);
+
+  const data = { id: user.id, email: user.email, name: user.name };
+  const token = jwt.sign(data, secret as string, {
+    expiresIn: "1d",
+  });
+  console.log(token);
+  return res.status(201).json({
+    success: true,
+    message: "user created successfully",
+    user,
+    token,
+  });
 });
 
 userRouter.post("/signin", async (req, res) => {
@@ -102,6 +77,7 @@ userRouter.post("/signin", async (req, res) => {
         error: validation.error,
       });
     }
+    console.log(validation)
     const user = await prisma.user.findUnique({
       where: {
         email,
@@ -178,59 +154,52 @@ userRouter.get("/bulk", async (req, res) => {
   }
 });
 
-userRouter.get("/me", async (req, res) => {
-  try {
-    const userId = req.get("userId");
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-      },
-    });
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "user not found",
-      });
-    }
-    return res.status(200).json({
-      success: true,
-      user,
-    });
-  } catch (error) {
-    return res.status(500).json({
+userRouter.get("/me", authMiddleware, async (req, res) => {
+  const userId = req.get("userId");
+  const user = await prisma.user.findFirst({
+    where: { id: userId },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+    },
+  });
+  console.log(user);
+  if (!user) {
+    return res.status(404).json({
       success: false,
-      message: "server error",
+      message: "user not found",
     });
   }
+  return res.status(200).json({
+    success: true,
+    user,
+  });
 });
 
-userRouter.put("/update", async (req, res) => {
-  try {
-    const userId = req.get("userId");
-    const { name, email } = req.body;
+userRouter.put("/update", authMiddleware, async (req: any, res) => {
+   const userId = req.userId;
 
-    const updatedUser = await prisma.user.update({
-      where: { id: userId },
-      data: {
-        name,
-        email,
-      },
-    });
+   console.log("USER ID =", userId);
 
-    return res.status(200).json({
-      success: true,
-      message: "user updated successfully",
-      user: updatedUser,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "server error",
-    });
-  }
+  const { name, email } = req.body;
+
+  console.log("Name =",name ,"Email = ",email);
+
+  const updatedUser = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      name,
+      email,
+    },
+  });
+  console.log("UpdateUser = " , updatedUser)
+
+  return res.status(200).json({
+    success: true,
+    message: "user updated successfully",
+    user: updatedUser,
+  });
 });
 
 export default userRouter;
