@@ -44,7 +44,7 @@ export const authMiddleware = async (
 
    console.log( "Decoded =",decoded);
 
-    req.userId = decoded.userId;
+    req.userId = decoded.id;
 
     next();
 

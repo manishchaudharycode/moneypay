@@ -8,7 +8,8 @@ import { authMiddleware } from "../middleware/userMiddleware";
 const userRouter = Router();
 
 userRouter.post("/signup", async (req, res) => {
-  const { email, name, password } = req.body;
+ try {
+   const { email, name, password } = req.body;
 
   // console.log(password)
 
@@ -64,6 +65,9 @@ userRouter.post("/signup", async (req, res) => {
     user,
     token,
   });
+ } catch (error) {
+  console.log(error);
+ }
 });
 
 userRouter.post("/signin", async (req, res) => {

@@ -15,6 +15,7 @@ app.use(cors());
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/account", accountRouter);
 
-app.listen(3000, () => {
-  console.log("server start");
+const PORT = 4000
+app.listen(PORT, () => {
+  console.log("server start on port "+ PORT );
 });
