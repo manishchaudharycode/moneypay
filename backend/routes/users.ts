@@ -56,7 +56,7 @@ userRouter.post("/signup", async (req, res) => {
 
   const data = { id: user.id, email: user.email, name: user.name };
   const token = jwt.sign(data, secret as string, {
-    expiresIn: "1d",
+    expiresIn: "24d",
   });
   console.log(token);
   return res.status(201).json({
