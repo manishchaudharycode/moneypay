@@ -3,12 +3,10 @@
 import Link from "next/link";
 import { Eye, EyeOff, Sparkles } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { loginApi, signUpApi } from "@/lib/api";
-
 
 type AuthMode = "signin" | "signup";
 
@@ -366,34 +364,30 @@ function AnimatedAuthForm({
   const footerText = isSignUp
     ? "Already have an account?"
     : "Don't have an account?";
-  const router = useRouter();
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
     const playload = {
       email,
-      name, 
-      password
+      name,
+      password,
+    };
+    try {
+      if (mode == "signin") {
+        const { token } = await loginApi(playload);
+        if (token) {
+          localStorage.setItem("token", "Bearer " + token);
+          window.location.href = "/dashboard";
+        }
+      } else {
+        const res = signUpApi(playload);
+        window.location.href = "/dashboard";
+        return res;
+      }
+    } catch (error) {
+      console.log(error);
     }
-   try {
-
-     if(mode == "signin"){
-      const res =loginApi(playload)
-      router.push("/dashboard")
-      return res
-
-
-    }else{
-      const res = signUpApi(playload)
-      router.push("/dashboard")
-      return res
-
-    }
-    
-   } catch (error) {
-    console.log(error);
-   }
     setIsLoading(true);
     window.setTimeout(() => setIsLoading(false), 500);
   }

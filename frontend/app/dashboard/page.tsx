@@ -1,9 +1,11 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { Input } from "@base-ui/react";
 import {
   Card,
   CardContent,
@@ -12,20 +14,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useEffect, useState } from "react";
-import axios from "axios";
-
-const stats = [
-  { label: "Balance", value: "$12,480.00" },
-  { label: "Received", value: "$8,245.50" },
-  { label: "Sent", value: "$3,910.25" },
-  { label: "Pending", value: "$420.00" },
-];
-
-const users = [
-  { name: "Aarav Sharma", email: "aarav@example.com", status: "Active" },
-  { name: "Priya Mehta", email: "priya@example.com", status: "Active" },
-  { name: "Rohan Das", email: "rohan@example.com", status: "Pending" },
-];
+import { SendMoney } from "@/components/send";
+import { api } from "@/lib/api";
+import { Account } from "@/components/account";
+import { UserAccountCard } from "@/components/userAccountCard";
 
 const transactions = [
   {
@@ -66,36 +58,71 @@ type User = {
   name: string;
   email: string;
 };
+interface Account {
+  id: number;
+  name: string;
+  accountNumber: string;
+  bankName: string;
+}
 
 export default function DashboardPage() {
-  const [user, setUser] = useState<User | null>(() => {
-    const savedData = localStorage.getItem("profileData");
-    return savedData ? JSON.parse(savedData) : null;
-  });;
-  const [loading, setLoading] = useState<boolean>(true);
+  const [name, setName] = useState<User | null>();
+  const [users, setUsers] = useState<User[]>([]);
+  const [filter, setFilter] = useState("");
+  const [accounts, setAccounts] = useState<Account[]>([]);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:4000/api/v1/user/me",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")?.split(" ")[1]}`,
-          },
-        }
-      );
-
-      setUser(response.data.user);
-      localStorage.setItem("profileData", JSON.stringify(response.data.user));
+  useEffect(() => {
+    const fetchAccounts = async () => {
+      try {
+        const response = await api.get("/account/all");
+        setAccounts(response.data.accounts);
+      } catch (error) {
+        console.error("Failed to fetch accounts:", error);
+      } finally {
         setLoading(false);
-    } catch (error) {
-      console.error("User fetch failed:", error);
-    }
-  };
+      }
+    };
 
-  fetchUser();
-}, []);
+    fetchAccounts();
+  }, []);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await api.get("/user/me");
+        setName(response.data.user);
+      } catch (error) {
+        console.error("User fetch failed:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await api.get("/user/bulk");
+        setUsers(response.data.users);
+      } catch (error) {
+        console.error("Failed to fetch users", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const filteredUsers = users?.filter((user) =>
+    user.name.toLowerCase().includes(filter.toLowerCase()),
+  );
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    router.push("/signin");
+  };
   return (
     <main className="min-h-screen bg-background text-foreground">
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-6">
@@ -113,32 +140,47 @@ useEffect(() => {
             <Link href="/">
               <Button variant="outline">Home</Button>
             </Link>
-            <Button>{user?.name}</Button>
+            <Button>{name?.name}</Button>
+            <Button onClick={handleLogOut}>Logout</Button>
           </div>
         </header>
-
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <Card key={stat.label}>
-              <CardHeader className="pb-0">
-                <CardDescription>{stat.label}</CardDescription>
-                <CardTitle className="text-2xl">{stat.value}</CardTitle>
-              </CardHeader>
-            </Card>
-          ))}
+        <div className="">
+          <Account></Account>
         </div>
-
+        <div className="grid gap-4">
+          {loading ? (
+            <p>Loading accounts...</p>
+          ) : (
+            <div className="grid gap-4">
+              {accounts?.map((account) => (
+                <UserAccountCard
+                  key={account.id}
+                  username={account.name}
+                  accountNumber={account.accountNumber}
+                  bankName={account.bankName}
+                />
+              ))}
+            </div>
+          )}
+        </div>
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           <Card>
             <CardHeader>
               <CardTitle>Users</CardTitle>
-              <CardDescription>People connected to your account.</CardDescription>
+              <div>
+                <Input
+                  className="w-75 p-1 mt-1 rounded-xl"
+                  placeholder="user"
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                ></Input>
+              </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              {users.map((user) => (
+              {filteredUsers.map((user) => (
                 <div
-                  key={user.email}
-                  className="flex items-center justify-between gap-4 rounded-md border p-3"
+                  key={user.id}
+                  className="flex items-center justify-between gap-20 rounded-md border p-3"
                 >
                   <div className="min-w-0">
                     <p className="truncate text-sm font-medium">{user.name}</p>
@@ -147,10 +189,7 @@ useEffect(() => {
                     </p>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
-                    <span className="rounded-md border px-2 py-1 text-xs text-muted-foreground">
-                      {user.status}
-                    </span>
-                    <Button size="sm">Pay now</Button>
+                    <SendMoney name={user.name} to={user.id} />
                   </div>
                 </div>
               ))}
@@ -177,7 +216,10 @@ useEffect(() => {
                   </thead>
                   <tbody>
                     {transactions.map((transaction) => (
-                      <tr key={transaction.id} className="border-b last:border-b-0">
+                      <tr
+                        key={transaction.id}
+                        className="border-b last:border-b-0"
+                      >
                         <td className="py-3 pr-4">
                           <div className="font-medium">{transaction.id}</div>
                           <div className="text-muted-foreground">
