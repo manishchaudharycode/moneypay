@@ -4,6 +4,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 
+import { api } from "@/lib/api";
+import { Banks } from "./bank";
+import { IBANK } from "@/types/types";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,35 +17,53 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
 import { Field, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { Banks } from "./bank";
-import { api } from "@/lib/api";
-import { IBANK } from "@/types/types";
+interface UpdateAccountProps {
+  accountId: string;
+  bankName: string;
+  branch: string;
+  accountNumber: string;
+  image: string;
+}
 
-export function Account() {
-  const [selectedBank, setSelectedBank] = useState<IBANK | null>(null);
-  const [accountNumber, setAccountNumber] = useState("");
-  const [reAccountNumber, setReAccountNumber] = useState("");
+export function UpdateAccount({
+  accountId,
+  bankName,
+  branch,
+  accountNumber,
+  image,
+}: UpdateAccountProps) {
+  const [selectedBank, setSelectedBank] = useState<IBANK | null>({
+    bankName,
+    branch,
+    image,
+  } as IBANK);
+
+  const [accountNo, setAccountNo] = useState(accountNumber);
+  const [reAccountNo, setReAccountNo] = useState(accountNumber);
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleCreateAccount = async () => {
-    setError("");
+  const handleUpdate = async () => {
 
+     
+    setError("");
     if (!selectedBank) {
       setError("Please select a bank");
       return;
     }
 
-    if (accountNumber.length !== 12) {
+    if (accountNo.length !== 12) {
       setError("Account number must be 12 digits");
       return;
     }
 
-    if (accountNumber !== reAccountNumber) {
+    if (accountNo !== reAccountNo) {
       setError("Account numbers do not match");
       return;
     }
@@ -49,17 +71,18 @@ export function Account() {
     try {
       setLoading(true);
 
-      await api.post("/account", {
+      await api.put(`/account/update/${accountId}`, {
         bankName: selectedBank.bankName,
         branch: selectedBank.branch,
         image: selectedBank.image,
-        accountNumber,
+        accountNumber: accountNumber,
       });
 
-      window.location.href = "/dashboard";
+      alert("Account updated successfully");
+      window.location.reload();
     } catch (error) {
       console.error(error);
-      setError("Failed to create account");
+      setError("Failed to update account");
     } finally {
       setLoading(false);
     }
@@ -68,17 +91,14 @@ export function Account() {
   return (
     <Dialog>
       <DialogTrigger >
-        <Button
-          variant="outline"
-          className="h-12 px-6 text-base rounded-xl"
-        >
-          Add Account
+        <Button variant="outline">
+          Update Account
         </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Add Account</DialogTitle>
+          <DialogTitle>Update Account</DialogTitle>
         </DialogHeader>
 
         {selectedBank && (
@@ -109,7 +129,7 @@ export function Account() {
               <button
                 type="button"
                 onClick={() => setSelectedBank(null)}
-                className="absolute top-3 right-3"
+                className="absolute right-3 top-3"
               >
                 <X className="size-4" />
               </button>
@@ -118,7 +138,9 @@ export function Account() {
         )}
 
         {!selectedBank && (
-          <Banks onSelect={(bank) => setSelectedBank(bank)} />
+          <Banks
+            onSelect={(bank) => setSelectedBank(bank)}
+          />
         )}
 
         {selectedBank && (
@@ -130,15 +152,13 @@ export function Account() {
 
               <Input
                 id="account-number"
-                type="text"
+                value={accountNo}
                 maxLength={12}
-                value={accountNumber}
                 onChange={(e) =>
-                  setAccountNumber(
+                  setAccountNo(
                     e.target.value.replace(/\D/g, "")
                   )
                 }
-                placeholder="Enter 12 digit account number"
               />
             </Field>
 
@@ -149,15 +169,13 @@ export function Account() {
 
               <Input
                 id="re-account-number"
-                type="text"
+                value={reAccountNo}
                 maxLength={12}
-                value={reAccountNumber}
                 onChange={(e) =>
-                  setReAccountNumber(
+                  setReAccountNo(
                     e.target.value.replace(/\D/g, "")
                   )
                 }
-                placeholder="Re-enter account number"
               />
             </Field>
 
@@ -171,10 +189,12 @@ export function Account() {
 
         <DialogFooter>
           <Button
-            onClick={handleCreateAccount}
+            onClick={handleUpdate}
             disabled={loading}
           >
-            {loading ? "Creating..." : "Add Account"}
+            {loading
+              ? "Updating..."
+              : "Update Account"}
           </Button>
         </DialogFooter>
       </DialogContent>

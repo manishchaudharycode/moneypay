@@ -1,15 +1,22 @@
 "use client";
 
+import Image from "next/image";
+import { UpdateAccount } from "./updateAccount";
+
 interface UserAccountCardProps {
-  username: string;
-  accountNumber: string;
   bankName: string;
+  branch: string;
+  accountNumber: string;
+  image: string;
+  id: string;
 }
 
 export function UserAccountCard({
-  username,
-  accountNumber,
   bankName,
+  accountNumber,
+  image,
+  branch,
+  id,
 }: UserAccountCardProps) {
   const maskedAccountNumber =
     accountNumber.length > 4
@@ -17,25 +24,38 @@ export function UserAccountCard({
       : accountNumber;
 
   return (
-    <div className="w-full max-w-md rounded-3xl border bg-neutral-900 p-10 shadow-lg transition-all hover:shadow-xl">
-      <div className="flex items-center gap-4">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-500 text-xl font-bold text-white">
-          {username.charAt(0).toUpperCase()}
+    <div className="flex w-max p-4">
+      <div className="relative max-w-sm rounded-3xl border bg-slate-900 p-12">
+        <div className="absolute right-3 top-3">
+          <UpdateAccount
+            accountId={id}
+            bankName={bankName}
+            branch={branch}
+            accountNumber={accountNumber}
+            image={image}
+          />
+        </div>
+        <div className="mt-4 flex items-center gap-4">
+          <div className="h-20 w-20 overflow-hidden rounded-full bg-neutral-500">
+            <Image
+              src={image}
+              alt={bankName}
+              width={60}
+              height={60}
+              className="h-full w-full object-contain"
+            />
+          </div>
+          <div className="text-sm text-white">
+            <p className="font-semibold">{bankName}</p>
+            <p className="text-gray-300">{branch}</p>
+          </div>
         </div>
 
-        <h2 className="text-xl font-semibold text-white">
-          {username}
-        </h2>
-      </div>
-
-      <div className="mt-6 text-xl text-white">
-        <p>{bankName}</p>
-      </div>
-
-      <div className="mt-6 border-t border-neutral-700 pt-4">
-        <h3 className="font-mono text-2xl font-bold tracking-widest text-white">
-          {maskedAccountNumber}
-        </h3>
+        <div className="mt-6 pt-4">
+          <h3 className="font-mono text-2xl font-bold tracking-widest text-white">
+            {maskedAccountNumber}
+          </h3>
+        </div>
       </div>
     </div>
   );

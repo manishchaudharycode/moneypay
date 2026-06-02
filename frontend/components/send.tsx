@@ -40,7 +40,7 @@ export function SendMoney({ to, name }: { to: string; name: string }) {
     <Dialog>
       <form>
         <DialogTrigger >
-          <Button variant="outline">Pay now</Button>
+          <Button variant="outline" >Pay now</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>

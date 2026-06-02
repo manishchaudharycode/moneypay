@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-
 import { ThemeToggle } from "@/components/theme-toggle";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@base-ui/react";
 import {
@@ -18,7 +16,6 @@ import { SendMoney } from "@/components/send";
 import { api } from "@/lib/api";
 import { Account } from "@/components/account";
 import { UserAccountCard } from "@/components/userAccountCard";
-
 const transactions = [
   {
     id: "TXN-1001",
@@ -59,19 +56,17 @@ type User = {
   email: string;
 };
 interface Account {
-  id: number;
-  name: string;
+  _id: string;
+  image: string;
   accountNumber: string;
   bankName: string;
+  branch: string;
 }
-
 export default function DashboardPage() {
   const [name, setName] = useState<User | null>();
   const [users, setUsers] = useState<User[]>([]);
   const [filter, setFilter] = useState("");
   const [accounts, setAccounts] = useState<Account[]>([]);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchAccounts = async () => {
@@ -80,14 +75,10 @@ export default function DashboardPage() {
         setAccounts(response.data.accounts);
       } catch (error) {
         console.error("Failed to fetch accounts:", error);
-      } finally {
-        setLoading(false);
       }
     };
-
     fetchAccounts();
   }, []);
-
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -97,7 +88,6 @@ export default function DashboardPage() {
         console.error("User fetch failed:", error);
       }
     };
-
     fetchUser();
   }, []);
 
@@ -121,7 +111,7 @@ export default function DashboardPage() {
   const handleLogOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    router.push("/signin");
+    window.location.href = "/signin";
   };
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -144,24 +134,21 @@ export default function DashboardPage() {
             <Button onClick={handleLogOut}>Logout</Button>
           </div>
         </header>
-        <div className="">
+        <div className="ml-230">
           <Account></Account>
         </div>
-        <div className="grid gap-4">
-          {loading ? (
-            <p>Loading accounts...</p>
-          ) : (
-            <div className="grid gap-4">
-              {accounts?.map((account) => (
-                <UserAccountCard
-                  key={account.id}
-                  username={account.name}
-                  accountNumber={account.accountNumber}
-                  bankName={account.bankName}
-                />
-              ))}
+        <div className="flex gap-4 overflow-hidden overflow-x-scroll mask-l-from-90% mask-r-from-90% px-10 hide-scrollbar">
+          {accounts.map((account, index) => (
+            <div key={index}>
+              <UserAccountCard
+                id={account._id}
+                image={account.image}
+                bankName={account.bankName}
+                branch={account.branch}
+                accountNumber={account.accountNumber}
+              />
             </div>
-          )}
+          ))}
         </div>
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           <Card>
