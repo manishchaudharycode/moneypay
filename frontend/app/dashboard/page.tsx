@@ -1,9 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@base-ui/react";
+
 import {
   Card,
   CardContent,
@@ -11,11 +15,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useEffect, useState } from "react";
+
 import { SendMoney } from "@/components/send";
 import { api } from "@/lib/api";
 import { Account } from "@/components/account";
 import { UserAccountCard } from "@/components/userAccountCard";
+
 const transactions = [
   {
     id: "TXN-1001",
@@ -50,61 +55,96 @@ const transactions = [
     status: "Completed",
   },
 ];
+
 type User = {
   id: string;
   name: string;
   email: string;
 };
-interface Account {
-  _id: string;
+
+interface AccountType {
+  id: string;
   image: string;
   accountNumber: string;
   bankName: string;
   branch: string;
 }
+
+function DashboardSkeleton() {
+  return (
+    <main className="min-h-screen bg-background p-6">
+      <div className="mx-auto max-w-6xl space-y-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-10 w-40" />
+          <div className="flex gap-2">
+            <Skeleton className="h-10 w-10 rounded-md" />
+            <Skeleton className="h-10 w-24 rounded-md" />
+            <Skeleton className="h-10 w-32 rounded-md" />
+          </div>
+        </div>
+
+        {/* Balance Card */}
+        <Skeleton className="h-32 w-full rounded-xl" />
+
+        {/* Accounts */}
+        <div className="flex gap-4">
+          {[1, 2, 3].map((item) => (
+            <Skeleton
+              key={item}
+              className="h-48 w-80 flex-shrink-0 rounded-xl"
+            />
+          ))}
+        </div>
+
+        {/* Main Grid */}
+        <div className="grid gap-6 lg:grid-cols-2">
+          <Skeleton className="h-[500px] rounded-xl" />
+          <Skeleton className="h-[500px] rounded-xl" />
+        </div>
+      </div>
+    </main>
+  );
+}
+
 export default function DashboardPage() {
-  const [name, setName] = useState<User | null>();
+  const [loading, setLoading] = useState(true);
+
+  const [name, setName] = useState<User | null>(null);
   const [users, setUsers] = useState<User[]>([]);
   const [filter, setFilter] = useState("");
-  const [accounts, setAccounts] = useState<Account[]>([]);
+  const [accounts, setAccounts] = useState<AccountType[]>([]);
 
   useEffect(() => {
-    const fetchAccounts = async () => {
-      try {
-        const response = await api.get("/account/all");
-        setAccounts(response.data.accounts);
-      } catch (error) {
-        console.error("Failed to fetch accounts:", error);
-      }
-    };
-    fetchAccounts();
-  }, []);
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await api.get("/user/me");
-        setName(response.data.user);
-      } catch (error) {
-        console.error("User fetch failed:", error);
-      }
-    };
-    fetchUser();
-  }, []);
+    const fetchData = async () => {
+      const start = Date.now();
 
-  useEffect(() => {
-    const fetchUsers = async () => {
       try {
-        const response = await api.get("/user/bulk");
-        setUsers(response.data.users);
+        const [userRes, usersRes, accountsRes] = await Promise.all([
+          api.get("/user/me"),
+          api.get("/user/bulk"),
+          api.get("/account/all"),
+        ]);
+
+        setName(userRes.data.user);
+        setUsers(usersRes.data.users);
+        setAccounts(accountsRes.data.accounts);
       } catch (error) {
-        console.error("Failed to fetch users", error);
+        console.error("Failed to load dashboard:", error);
       }
+
+      const elapsed = Date.now() - start;
+      const remaining = Math.max(0, 3000 - elapsed);
+
+      setTimeout(() => {
+        setLoading(false);
+      }, remaining);
     };
 
-    fetchUsers();
+    fetchData();
   }, []);
 
-  const filteredUsers = users?.filter((user) =>
+  const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(filter.toLowerCase()),
   );
 
@@ -113,6 +153,11 @@ export default function DashboardPage() {
     localStorage.removeItem("user");
     window.location.href = "/signin";
   };
+
+  if (loading) {
+    return <DashboardSkeleton />;
+  }
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-6">
@@ -125,105 +170,114 @@ export default function DashboardPage() {
               Dashboard overview for users and transactions.
             </p>
           </div>
+
           <div className="flex items-center gap-2">
             <ThemeToggle />
+
             <Link href="/">
               <Button variant="outline">Home</Button>
             </Link>
+
             <Button>{name?.name}</Button>
+
             <Button onClick={handleLogOut}>Logout</Button>
           </div>
         </header>
-        <div className="ml-230">
-          <Account></Account>
-        </div>
-        <div className="flex gap-4 overflow-hidden overflow-x-scroll mask-l-from-90% mask-r-from-90% px-10 hide-scrollbar">
-          {accounts.map((account, index) => (
-            <div key={index}>
-              <UserAccountCard
-                id={account._id}
-                image={account.image}
-                bankName={account.bankName}
-                branch={account.branch}
-                accountNumber={account.accountNumber}
-              />
-            </div>
+        <div className="ml-240"><Account /></div>
+        <div className="flex gap-4 overflow-x-auto px-2">
+          {accounts.map((account) => (
+            <UserAccountCard
+              key={account.id}
+              id={account.id}
+              image={account.image}
+              bankName={account.bankName}
+              branch={account.branch}
+              accountNumber={account.accountNumber}
+            />
           ))}
         </div>
+
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+          {/* Users */}
           <Card>
             <CardHeader>
               <CardTitle>Users</CardTitle>
-              <div>
-                <Input
-                  className="w-75 p-1 mt-1 rounded-xl"
-                  placeholder="user"
-                  value={filter}
-                  onChange={(e) => setFilter(e.target.value)}
-                ></Input>
-              </div>
+
+              <Input
+                className="mt-2 w-full rounded-xl border p-2"
+                placeholder="Search user..."
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+              />
             </CardHeader>
+
             <CardContent className="space-y-4">
               {filteredUsers.map((user) => (
                 <div
                   key={user.id}
-                  className="flex items-center justify-between gap-20 rounded-md border p-3"
+                  className="flex items-center justify-between rounded-md border p-3"
                 >
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-medium">{user.name}</p>
-                    <p className="truncate text-sm text-muted-foreground">
+                  <div>
+                    <p className="font-medium">{user.name}</p>
+                    <p className="text-sm text-muted-foreground">
                       {user.email}
                     </p>
                   </div>
-                  <div className="flex shrink-0 items-center gap-2">
-                    <SendMoney name={user.name} to={user.id} />
-                  </div>
+
+                  <SendMoney name={user.name} to={user.id} />
                 </div>
               ))}
             </CardContent>
           </Card>
 
+          {/* Transactions */}
           <Card>
             <CardHeader>
               <CardTitle>Transactions</CardTitle>
-              <CardDescription>Recent payment activity.</CardDescription>
+              <CardDescription>
+                Recent payment activity.
+              </CardDescription>
             </CardHeader>
+
             <CardContent>
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[640px] text-left text-sm">
-                  <thead className="border-b text-muted-foreground">
+                  <thead className="border-b">
                     <tr>
-                      <th className="py-3 pr-4 font-medium">Transaction</th>
-                      <th className="py-3 pr-4 font-medium">User</th>
-                      <th className="py-3 pr-4 font-medium">Type</th>
-                      <th className="py-3 pr-4 font-medium">Amount</th>
-                      <th className="py-3 pr-4 font-medium">Status</th>
-                      <th className="py-3 font-medium">Action</th>
+                      <th className="py-3">Transaction</th>
+                      <th className="py-3">User</th>
+                      <th className="py-3">Type</th>
+                      <th className="py-3">Amount</th>
+                      <th className="py-3">Status</th>
+                      <th className="py-3">Action</th>
                     </tr>
                   </thead>
+
                   <tbody>
                     {transactions.map((transaction) => (
-                      <tr
-                        key={transaction.id}
-                        className="border-b last:border-b-0"
-                      >
-                        <td className="py-3 pr-4">
-                          <div className="font-medium">{transaction.id}</div>
+                      <tr key={transaction.id} className="border-b">
+                        <td className="py-3">
+                          <div className="font-medium">
+                            {transaction.id}
+                          </div>
                           <div className="text-muted-foreground">
                             {transaction.date}
                           </div>
                         </td>
-                        <td className="py-3 pr-4">{transaction.user}</td>
-                        <td className="py-3 pr-4">{transaction.type}</td>
-                        <td className="py-3 pr-4 font-medium">
+
+                        <td>{transaction.user}</td>
+                        <td>{transaction.type}</td>
+                        <td className="font-medium">
                           {transaction.amount}
                         </td>
-                        <td className="py-3 pr-4">
-                          <span className="rounded-md border px-2 py-1 text-xs text-muted-foreground">
+
+                        <td>
+                          <span className="rounded border px-2 py-1 text-xs">
                             {transaction.status}
                           </span>
                         </td>
-                        <td className="py-3">
+
+                        <td>
                           <Button size="sm" variant="outline">
                             Pay now
                           </Button>

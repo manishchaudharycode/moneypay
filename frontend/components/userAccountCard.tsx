@@ -23,6 +23,8 @@ export function UserAccountCard({
       ? `${"X".repeat(accountNumber.length - 4)}${accountNumber.slice(-4)}`
       : accountNumber;
 
+      console.log(id);
+
   return (
     <div className="flex w-max p-4">
       <div className="relative max-w-sm rounded-3xl border bg-slate-900 p-12">

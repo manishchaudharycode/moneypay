@@ -196,21 +196,23 @@ accountRouter.get("/test", (req, res) => {
   res.json({ message: "working" });
 });
 
-accountRouter.put("/update", async (req, res) => {
+accountRouter.put("/:accountId", async (req, res) => {
   try {
     const userId = req.userId;
-
+    const { accountId } = req.params;
+    
     if (!userId) {
       return res.status(401).json({
         success: false,
-        message: "User ID not found in request",
+        message: "Unauthorized",
       });
     }
-
-    const { bankName, branch, image, accountNumber, } = req.body;
-
+    const { bankName, branch, image, accountNumber } = req.body;
     const account = await prisma.account.findFirst({
-      where: { userId },
+      where: {
+        id: accountId,
+        userId,
+      },
     });
 
     if (!account) {
@@ -219,14 +221,36 @@ accountRouter.put("/update", async (req, res) => {
         message: "Account not found",
       });
     }
+    if (
+      accountNumber &&
+      accountNumber !== account.accountNumber
+    ) {
+      const existingAccount = await prisma.account.findFirst({
+        where: {
+          accountNumber,
+          NOT: {
+            id: account.id,
+          },
+        },
+      });
+
+      if (existingAccount) {
+        return res.status(400).json({
+          success: false,
+          message: "Account number already exists",
+        });
+      }
+    }
 
     const updatedAccount = await prisma.account.update({
-      where: { accountNumber: account.accountNumber },
+      where: {
+        id: account.id,
+      },
       data: {
-        ...(bankName && { bankName }),
-        ...(branch && { branch }),
-        ...(image && { image }),
-        ...(accountNumber && { accountNumber }),
+        ...(bankName !== undefined && { bankName }),
+        ...(branch !== undefined && { branch }),
+        ...(image !== undefined && { image }),
+        ...(accountNumber !== undefined && { accountNumber }),
       },
     });
 
@@ -236,7 +260,8 @@ accountRouter.put("/update", async (req, res) => {
       data: updatedAccount,
     });
   } catch (error) {
-    console.error(error);
+    console.error("Update Account Error:", error);
+
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -246,7 +271,6 @@ accountRouter.put("/update", async (req, res) => {
 
 accountRouter.get("/all", async (req, res) => {
   const userId = req.userId;
-  console.log("hi");
   try {
     const allAccs = await prisma.account.findMany({ where: { userId } });
 
