@@ -3,6 +3,7 @@ import { Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -92,7 +93,9 @@ export default function Home() {
                     className="cursor-pointer rounded-full w-46 h-12"
                     variant="default"
                   >
-                    <img
+                    <Image
+                      height={200}
+                      width={200}
                       className="size-4 dark:invert"
                       alt=""
                       src="/vercel.svg"
@@ -113,13 +116,13 @@ export default function Home() {
 
             <div className="relative w-full h-full">
               <div className="absolute z-10 top-15 md:top-22 lg:top-29 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                <img
+                <Image
                   className="size-34 md:size-50 lg:size-66 dark:hidden"
                   alt="MoneyPay app mark"
                   src="https://raw.githubusercontent.com/aliimam-in/templates/076f7e05b77fc6d31aa3c751406c9b2123c45954/apps/vercel/public/vercel-logo-white.svg"
                   fetchPriority="high"
                 />
-                <img
+                <Image
                   className="size-34 md:size-50 lg:size-66 hidden dark:block"
                   alt="MoneyPay app mark"
                   src="https://raw.githubusercontent.com/aliimam-in/templates/076f7e05b77fc6d31aa3c751406c9b2123c45954/apps/vercel/public/vercel-logo-black.svg"

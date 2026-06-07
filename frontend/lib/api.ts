@@ -17,12 +17,17 @@ interface LoginResponse {
   };
 }
 
+export const token =
+  typeof window !== "undefined"
+    ? localStorage.getItem("token")
+    : null;
+
 const BACKEND_URI = process.env.BACKEND_URI || "http://localhost:4000/api/v1";
 
 export const api = axios.create({
   baseURL: BACKEND_URI,
   headers: {
-    Authorization: localStorage.getItem("token"),
+    Authorization: token,
   },
 });
 

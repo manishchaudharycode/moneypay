@@ -20,6 +20,7 @@ import { SendMoney } from "@/components/send";
 import { api } from "@/lib/api";
 import { Account } from "@/components/account";
 import { UserAccountCard } from "@/components/userAccountCard";
+import QRCode from "@/components/userQR";
 
 const transactions = [
   {
@@ -87,7 +88,7 @@ function DashboardSkeleton() {
         {/* Balance Card */}
         <Skeleton className="h-32 w-full rounded-xl" />
 
-        {/* Accounts */}
+
         <div className="flex gap-4">
           {[1, 2, 3].map((item) => (
             <Skeleton
@@ -96,8 +97,6 @@ function DashboardSkeleton() {
             />
           ))}
         </div>
-
-        {/* Main Grid */}
         <div className="grid gap-6 lg:grid-cols-2">
           <Skeleton className="h-[500px] rounded-xl" />
           <Skeleton className="h-[500px] rounded-xl" />
@@ -160,6 +159,7 @@ export default function DashboardPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <QRCode userId="cmpvhurgc00009dmwtokl83t3" />
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-6">
         <header className="flex flex-col gap-4 border-b pb-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
@@ -183,7 +183,9 @@ export default function DashboardPage() {
             <Button onClick={handleLogOut}>Logout</Button>
           </div>
         </header>
-        <div className="ml-240"><Account /></div>
+        <div className="ml-240">
+          <Account />
+        </div>
         <div className="flex gap-4 overflow-x-auto px-2">
           {accounts.map((account) => (
             <UserAccountCard
@@ -234,9 +236,7 @@ export default function DashboardPage() {
           <Card>
             <CardHeader>
               <CardTitle>Transactions</CardTitle>
-              <CardDescription>
-                Recent payment activity.
-              </CardDescription>
+              <CardDescription>Recent payment activity.</CardDescription>
             </CardHeader>
 
             <CardContent>
@@ -257,9 +257,7 @@ export default function DashboardPage() {
                     {transactions.map((transaction) => (
                       <tr key={transaction.id} className="border-b">
                         <td className="py-3">
-                          <div className="font-medium">
-                            {transaction.id}
-                          </div>
+                          <div className="font-medium">{transaction.id}</div>
                           <div className="text-muted-foreground">
                             {transaction.date}
                           </div>
@@ -267,9 +265,7 @@ export default function DashboardPage() {
 
                         <td>{transaction.user}</td>
                         <td>{transaction.type}</td>
-                        <td className="font-medium">
-                          {transaction.amount}
-                        </td>
+                        <td className="font-medium">{transaction.amount}</td>
 
                         <td>
                           <span className="rounded border px-2 py-1 text-xs">
