@@ -8,7 +8,9 @@ export default function QRCode({ userId }: { userId: string }) {
   const [qrCode, setQrCode] = useState<string>("");
 
   useEffect(() => {
-    qr.toDataURL(`http://localhost:3000/pay?userId=${userId}`, (err, url) => {
+    qr.toDataURL(`${
+    process.env.NEXT_PUBLIC_CLIENT_URL || "http://localhost:3000"
+    }/pay?userId=${userId}`, (err, url) => {
       console.log(err);
       console.log(url);
       if (!err) setQrCode(url);
