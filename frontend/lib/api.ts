@@ -10,7 +10,7 @@ interface LoginResponse {
   success: boolean;
   message: string;
   token: string;
-  
+
   user: {
     id: string;
     email: string;
@@ -23,7 +23,7 @@ export const token =
     ? localStorage.getItem("token")
     : null;
 
-const BACKEND_URI = process.env.BACKEND_URI || "http://localhost:4000/api/v1";
+const BACKEND_URI = process.env.NEXT_PUBLIC_BACKEND_URI || "http://localhost:4000/api/v1";
 
 export const api = axios.create({
   baseURL: BACKEND_URI,
