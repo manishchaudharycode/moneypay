@@ -20,6 +20,9 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/account", accountRouter);
 app.use("/api/vi/", qrRoute);
 
+app.get("/",(req,res) => res.json({msg: "App Running on port 4000"}))
+app.get("/health",(req,res) => res.json({status: "ok"}))
+
 const PORT = 4000;
 app.listen(PORT, () => {
   console.log("server start on port " + PORT);
