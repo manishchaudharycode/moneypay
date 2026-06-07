@@ -47,7 +47,7 @@ export default function PayPage() {
 
       console.log(res?.data);
       setAmount("");
-    } catch (error: error | unknown) {
+    } catch (error: any) {
       toast.error(error?.response?.data?.message || "Transaction failed");
     } finally {
       setLoading(false);
