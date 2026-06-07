@@ -10,7 +10,7 @@ export default function QRCode({ userId }: { userId: string }) {
   useEffect(() => {
     qr.toDataURL(`${
     process.env.NEXT_PUBLIC_CLIENT_URL || "http://localhost:3000"
-    }/pay?userId=${userId}`, (err, url) => {
+    }/pay?userId=${userId}&accountId="`, (err, url) => {
       console.log(err);
       console.log(url);
       if (!err) setQrCode(url);
