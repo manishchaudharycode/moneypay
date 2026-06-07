@@ -2,6 +2,7 @@ import { Router } from "express";
 import { signinValidation, signupValidation } from "../validation";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import QRCode from "qrcode"
 import { prisma, secret } from "../config/config";
 import { authMiddleware } from "../middleware/userMiddleware";
 
@@ -127,6 +128,7 @@ userRouter.post("/signin", async (req, res) => {
     });
   }
 });
+
 
 userRouter.get("/bulk", authMiddleware, async (req, res) => {
   const userId = req.userId;

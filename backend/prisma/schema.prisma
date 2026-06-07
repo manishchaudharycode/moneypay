@@ -19,6 +19,7 @@ model user {
   email       String        @unique
   password    String
   account     account[]
+  upiID       String?
   sentTxn     transaction[] @relation("senderTxn")
   recievedTxn transaction[] @relation("recieverTxn")
 }
