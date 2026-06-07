@@ -1,17 +1,21 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE "user" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
 
-  - You are about to drop the column `balance` on the `user` table. All the data in the column will be lost.
-
-*/
--- AlterTable
-ALTER TABLE "user" DROP COLUMN "balance";
+    CONSTRAINT "user_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "account" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "balance" INTEGER NOT NULL DEFAULT 0,
+    "bankName" TEXT NOT NULL,
+    "branch" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "accountNumber" TEXT NOT NULL,
+    "balance" INTEGER NOT NULL DEFAULT 10000,
     "userId" TEXT NOT NULL,
 
     CONSTRAINT "account_pkey" PRIMARY KEY ("id")
@@ -26,6 +30,15 @@ CREATE TABLE "transaction" (
 
     CONSTRAINT "transaction_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "account_accountNumber_key" ON "account"("accountNumber");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "account_userId_accountNumber_key" ON "account"("userId", "accountNumber");
 
 -- AddForeignKey
 ALTER TABLE "account" ADD CONSTRAINT "account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,4 +1,4 @@
-export const secret = process.env.JWT_SECRET as string
+export const secret = process.env.JWT_SECRET as string;
 
 import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";

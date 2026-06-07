@@ -1,65 +1,172 @@
+import Link from "next/link";
+import { Plus } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="min-h-screen bg-background text-foreground relative">
+      <section className="pt-5 px-4 lg:px-0 flex mx-auto max-w-6xl flex-col items-center justify-center text-center">
+        <nav className="mb-5 flex w-full items-center justify-between gap-4 text-left">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-lg font-semibold"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <span>MoneyPay</span>
+          </Link>
+
+          <div className="flex items-center gap-1.5">
+            <ThemeToggle />
+            <Link href="/dashboard">
+              <Button className="hidden sm:inline-flex" variant="ghost">
+                Dashboard
+              </Button>
+            </Link>
+            <Link href="/signin">
+              <Button variant="ghost">Sign in</Button>
+            </Link>
+            <Link href="/signup">
+              <Button>Sign up</Button>
+            </Link>
+          </div>
+        </nav>
+
+        <div className="grid w-full border-0 border-b md:border relative grid-cols-10">
+          <div
+            className="absolute inset-0 "
+            style={{
+              background:
+                "radial-gradient(80% 100% at 0% 100%, #f97316 50%, #3b82f6 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to top, black 0%, transparent 60%)",
+              maskImage: "linear-gradient(to top, black 0%, transparent 60%)",
+              WebkitMaskRepeat: "no-repeat",
+              maskRepeat: "no-repeat",
+            }}
+          />
+
+          <Plus
+            size={30}
+            strokeWidth={0.8}
+            className="absolute -top-4 -left-4"
+          />
+          <Plus
+            size={30}
+            strokeWidth={0.8}
+            className="absolute -bottom-4 -right-4"
+          />
+
+          <div className="md:grid hidden w-full col-span-1">
+            {Array.from({ length: 8 }).map((_, idx) => (
+              <div
+                key={idx}
+                className="border-b last:border-0 flex-1 aspect-square"
+              />
+            ))}
+          </div>
+
+          <div className="md:col-span-8 col-span-10 relative">
+            <div className="md:flex hidden">
+              {Array.from({ length: 8 }).map((_, idx) => (
+                <div
+                  key={idx}
+                  className="border-l last:border-r flex-1 aspect-square"
+                />
+              ))}
+            </div>
+
+            <div className="relative w-full border -mt-0.5 flex items-center flex-col justify-center md:h-89 lg:h-116 p-6 md:p-20">
+              <h1 className="flex flex-col text-center text-3xl leading-none font-semibold tracking-tight lg:text-5xl">
+                Simple payments for everyday money movement.
+              </h1>
+
+              <p className="md:text-md text-muted-foreground py-6 lg:text-lg">
+                MoneyPay helps you send, receive, and manage payments <br />{" "}
+                from a clean account experience built for speed and clarity.
+              </p>
+
+              <div className="flex flex-wrap justify-center gap-2">
+                <Link href="/signup">
+                  <Button
+                    className="cursor-pointer rounded-full w-46 h-12"
+                    variant="default"
+                  >
+                    <Image
+                      height={200}
+                      width={200}
+                      className="size-4 dark:invert"
+                      alt=""
+                      src="/vercel.svg"
+                    />
+                    Start Paying
+                  </Button>
+                </Link>
+                <Link href="/dashboard">
+                  <Button
+                    className="cursor-pointer rounded-full w-46 h-12"
+                    variant="outline"
+                  >
+                    Open Dashboard
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            <div className="relative w-full h-full">
+              <div className="absolute z-10 top-15 md:top-22 lg:top-29 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <Image
+                  className="size-34 md:size-50 lg:size-66 dark:hidden"
+                  alt="MoneyPay app mark"
+                  src="https://raw.githubusercontent.com/aliimam-in/templates/076f7e05b77fc6d31aa3c751406c9b2123c45954/apps/vercel/public/vercel-logo-white.svg"
+                  fetchPriority="high"
+                />
+                <Image
+                  className="size-34 md:size-50 lg:size-66 hidden dark:block"
+                  alt="MoneyPay app mark"
+                  src="https://raw.githubusercontent.com/aliimam-in/templates/076f7e05b77fc6d31aa3c751406c9b2123c45954/apps/vercel/public/vercel-logo-black.svg"
+                  fetchPriority="high"
+                />
+              </div>
+
+              <div className="flex">
+                {Array.from({ length: 8 }).map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="border-l last:border-r border-b flex-1 aspect-square"
+                  />
+                ))}
+              </div>
+              <div className="flex">
+                {Array.from({ length: 8 }).map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="border-l border-b last:border-r flex-1 aspect-square"
+                  />
+                ))}
+              </div>
+              <div className="flex">
+                {Array.from({ length: 8 }).map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="border-l last:border-r flex-1 aspect-square"
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="md:grid hidden col-span-1">
+            {Array.from({ length: 8 }).map((_, idx) => (
+              <div
+                key={idx}
+                className="border-b last:border-b-0 flex-1 aspect-square"
+              />
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
