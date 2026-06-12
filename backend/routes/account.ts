@@ -268,11 +268,7 @@ accountRouter.get("/detail/:id", authMiddleware, async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      data: {
-        id: account.id,
-        accountNumber: account.accountNumber,
-        balance: account.balance,
-      },
+      account
     });
   } catch (error) {
     console.error(error);

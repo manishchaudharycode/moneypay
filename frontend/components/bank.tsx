@@ -1,12 +1,13 @@
-"use client"
+"use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import { banksData } from "@/lib/data/bank";
 
 interface Bank {
   name: string;
   ifsc: string;
   icon: string;
-  website: string;
 }
 
 interface BankGroup {
@@ -14,13 +15,14 @@ interface BankGroup {
   category: string;
   content: Bank[];
 }
+
 interface BanksProps {
-  banksData?: BankGroup[];
-  onSelect: (bank: Bank) => void;
+  banksData: BankGroup[];
+  onSelect?: (bank: Bank) => void;
 }
 
 export function Banks({
-  banksData = [],
+  banksData,
   onSelect,
 }: BanksProps) {
   const [selectedBank, setSelectedBank] =
@@ -28,7 +30,10 @@ export function Banks({
 
   const handleSelect = (bank: Bank) => {
     setSelectedBank(bank);
-    onSelect(bank);
+
+    if (onSelect) {
+      onSelect(bank);
+    }
   };
 
   return (
@@ -42,10 +47,29 @@ export function Banks({
           <div className="space-y-2">
             {group.content.map((bank) => (
               <button
-                key={bank.ifsc}
+                key={`${group.category}-${bank.ifsc}`}
                 onClick={() => handleSelect(bank)}
+                className={`flex w-full items-center gap-3 rounded-lg border p-3 text-left transition hover:bg-gray-50 ${
+                  selectedBank?.ifsc === bank.ifsc
+                    ? "border-blue-500 bg-blue-50"
+                    : "border-gray-200"
+                }`}
               >
-                {bank.name}
+                <Image
+                  src={bank.icon}
+                  alt={bank.name}
+                  className="h-8 w-8 object-contain"
+                />
+
+                <div>
+                  <div className="font-medium">
+                    {bank.name}
+                  </div>
+
+                  <div className="text-sm text-gray-500">
+                    IFSC Prefix: {bank.ifsc}
+                  </div>
+                </div>
               </button>
             ))}
           </div>
