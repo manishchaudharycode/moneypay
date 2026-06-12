@@ -265,7 +265,7 @@ accountRouter.get("/all", async (req, res) => {
   } catch (error) {}
 });
 
-accountRouter.get("/:id", authMiddleware, async (req, res) => {
+accountRouter.get("/detail/:id", authMiddleware, async (req, res) => {
   try {
     const userId = req.userId;
     const accountId = req.params.id as string;
