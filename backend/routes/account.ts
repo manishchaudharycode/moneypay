@@ -336,14 +336,16 @@ accountRouter.get("/transactions", async (req, res) => {
       sender: transaction.sender.name,
       reciever: transaction.reciever.name,
       date: transaction.createdAt,
+      type:
+        transaction.sender.id === req.userId
+          ? "DEBIT"
+          : ("CREDIT" as "CREDIT" | "DEBIT"),
     }));
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Transactions fetched successfully",
-        transactions: mappedTransactions,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Transactions fetched successfully",
+      transactions: mappedTransactions,
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -366,13 +368,17 @@ accountRouter.get("/transactions/:id", async (req, res) => {
         message: "Transaction not found",
       });
     }
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Transaction fetched successfully",
-        transaction: transaction,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Transaction fetched successfully",
+      transaction: {
+        ...transaction,
+        type:
+          transaction.sender.id === req.userId
+            ? "DEBIT"
+            : ("CREDIT" as "CREDIT" | "DEBIT"),
+      },
+    });
   } catch (error) {
     console.error(error);
     return res
