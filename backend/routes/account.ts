@@ -152,28 +152,6 @@ accountRouter.get("/test", (req, res) => {
   res.json({ message: "working" });
 });
 
-accountRouter.get("/:accountNumber", async (req, res) => {
-  const { accountNumber } = req.params;
-  try {
-    const account = await prisma.account.findFirst({
-      where: { accountNumber },
-    });
-    if (!account) {
-      return res.status(404).json({
-        success: false,
-        message: "Account not found",
-      });
-    }
-    return res.status(200).json({ success: true, data: account });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
-  }
-});
-
 accountRouter.put("/:accountId", async (req, res) => {
   try {
     const userId = req.userId;
