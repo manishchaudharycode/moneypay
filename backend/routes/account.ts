@@ -305,9 +305,10 @@ accountRouter.get("/:id", authMiddleware, async (req, res) => {
   }
 });
 
-accountRouter.delete("/", authMiddleware, async (req, res) => {
+accountRouter.delete("/:id", authMiddleware, async (req, res) => {
   try {
     const userId = req.userId;
+    const { id } = req.params;
 
     if (!userId) {
       return res.status(401).json({
@@ -328,7 +329,7 @@ accountRouter.delete("/", authMiddleware, async (req, res) => {
     }
 
     await prisma.account.delete({
-      where: { accountNumber: account.accountNumber },
+      where: { id: id as string },
     });
 
     return res.status(200).json({
