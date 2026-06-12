@@ -5,51 +5,6 @@ import { authMiddleware } from "../middleware/userMiddleware";
 const accountRouter = Router();
 accountRouter.use(authMiddleware);
 
-accountRouter.get("/balance", async (req, res) => {
-  try {
-    const userId = req.userId;
-    if (!userId) {
-      return res.status(401).json({
-        success: false,
-        message: "User ID not found in request",
-      });
-    }
-    
-    const user = await prisma.account.findFirst({
-      where: { userId },
-      select: {
-        userId: true,
-        balance: true,
-        user: {
-          select: {
-            email: true,
-            name: true,
-          },
-        },
-      },
-    });
-
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "Account not found",
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      balance: user.balance,
-      userDetails: user,
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      success: false,
-      message: "Error fetching balance",
-    });
-  }
-});
-
 accountRouter.post("/transfer", async (req, res) => {
   const { amount, to } = req.body;
 
@@ -139,7 +94,7 @@ accountRouter.post("/transfer", async (req, res) => {
   }
 });
 
-accountRouter.post("", authMiddleware, async (req, res) => {
+accountRouter.post("/", authMiddleware, async (req, res) => {
   try {
     const userId = req.userId;
 
@@ -150,9 +105,9 @@ accountRouter.post("", authMiddleware, async (req, res) => {
       });
     }
 
-    const { bankName, branch, image, accountNumber,  } = req.body;
+    const { bankName, branch, image, accountNumber } = req.body;
 
-    if (!bankName || !branch || !image || !accountNumber ) {
+    if (!bankName || !branch || !image || !accountNumber) {
       return res.status(400).json({
         success: false,
         message: "All required fields are mandatory",
@@ -192,15 +147,38 @@ accountRouter.post("", authMiddleware, async (req, res) => {
     });
   }
 });
+
 accountRouter.get("/test", (req, res) => {
   res.json({ message: "working" });
+});
+
+accountRouter.get("/:accountNumber", async (req, res) => {
+  const { accountNumber } = req.params;
+  try {
+    const account = await prisma.account.findFirst({
+      where: { accountNumber },
+    });
+    if (!account) {
+      return res.status(404).json({
+        success: false,
+        message: "Account not found",
+      });
+    }
+    return res.status(200).json({ success: true, data: account });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
 });
 
 accountRouter.put("/:accountId", async (req, res) => {
   try {
     const userId = req.userId;
     const { accountId } = req.params;
-    
+
     if (!userId) {
       return res.status(401).json({
         success: false,
@@ -221,10 +199,7 @@ accountRouter.put("/:accountId", async (req, res) => {
         message: "Account not found",
       });
     }
-    if (
-      accountNumber &&
-      accountNumber !== account.accountNumber
-    ) {
+    if (accountNumber && accountNumber !== account.accountNumber) {
       const existingAccount = await prisma.account.findFirst({
         where: {
           accountNumber,
@@ -366,6 +341,64 @@ accountRouter.delete("/", authMiddleware, async (req, res) => {
       success: false,
       message: "Internal server error",
     });
+  }
+});
+
+accountRouter.get("/transactions", async (req, res) => {
+  const userId = req.userId;
+  try {
+    const transactions = await prisma.transaction.findMany({
+      where: { senderId: userId },
+      include: { sender: true, reciever: true },
+    });
+    const mappedTransactions = transactions.map((transaction) => ({
+      id: transaction.id,
+      amount: transaction.amount,
+      sender: transaction.sender.name,
+      reciever: transaction.reciever.name,
+      date: transaction.createdAt,
+    }));
+    return res
+      .status(200)
+      .json({
+        success: true,
+        message: "Transactions fetched successfully",
+        transactions: mappedTransactions,
+      });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+});
+
+accountRouter.get("/transactions/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const transaction = await prisma.transaction.findFirst({
+      where: { id: parseInt(id) },
+      include: { sender: true, reciever: true },
+    });
+    if (!transaction) {
+      return res.status(404).json({
+        success: false,
+        message: "Transaction not found",
+      });
+    }
+    return res
+      .status(200)
+      .json({
+        success: true,
+        message: "Transaction fetched successfully",
+        transaction: transaction,
+      });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
   }
 });
 

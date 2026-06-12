@@ -22,6 +22,9 @@ model user {
   upiID       String?
   sentTxn     transaction[] @relation("senderTxn")
   recievedTxn transaction[] @relation("recieverTxn")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model account {
@@ -31,10 +34,12 @@ model account {
   image         String
   accountNumber String @unique
   balance       Int    @default(10000)
-  userId        String 
+  userId        String
   user          user   @relation(fields: [userId], references: [id])
 
   @@unique([userId, accountNumber])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model transaction {
@@ -44,4 +49,7 @@ model transaction {
   recieverId String
   sender     user   @relation(name: "senderTxn", fields: [senderId], references: [id])
   reciever   user   @relation(name: "recieverTxn", fields: [recieverId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

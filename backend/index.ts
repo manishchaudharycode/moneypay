@@ -3,7 +3,6 @@ import userRouter from "./routes/users";
 import accountRouter from "./routes/account";
 import cors from "cors";
 import dotenv from "dotenv";
-import qrRoute from "./routes/qrRoute";
 
 dotenv.config();
 
@@ -18,7 +17,6 @@ app.use(cors());
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/account", accountRouter);
-app.use("/api/vi/", qrRoute);
 
 app.get("/",(req,res) => res.json({msg: "App Running on port 4000"}))
 app.get("/health",(req,res) => res.json({status: "ok"}))
