@@ -1,80 +1,102 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { banksData } from "@/lib/data/bank";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, CheckCircle2 } from "lucide-react";
 
-interface Bank {
-  name: string;
-  ifsc: string;
-  icon: string;
-}
-
-interface BankGroup {
-  title: string;
-  category: string;
-  content: Bank[];
-}
+import { Bank, getIndianBanks } from "@/lib/bank";
+import { Input } from "@/components/ui/input";
 
 interface BanksProps {
-  banksData: BankGroup[];
   onSelect?: (bank: Bank) => void;
 }
 
-export function Banks({
-  banksData,
-  onSelect,
-}: BanksProps) {
-  const [selectedBank, setSelectedBank] =
-    useState<Bank | null>(null);
+export function Banks({ onSelect }: BanksProps) {
+  const [selectedBank, setSelectedBank] = React.useState<Bank | null>(null);
+  const [query, setQuery] = React.useState("");
+  const banks = React.useMemo(() => getIndianBanks(), []);
+  const filteredBanks = React.useMemo(() => {
+    const q = query.toLowerCase().trim();
+
+    if (!q) return banks;
+
+    return banks.filter(
+      (bank) =>
+        bank.name.toLowerCase().includes(q) ||
+        bank.ifsc.toLowerCase().includes(q),
+    );
+  }, [banks, query]);
 
   const handleSelect = (bank: Bank) => {
     setSelectedBank(bank);
-
-    if (onSelect) {
-      onSelect(bank);
-    }
+    onSelect?.(bank);
   };
 
   return (
-    <div className="space-y-6">
-      {banksData.map((group) => (
-        <div key={group.category}>
-          <h3 className="mb-3 text-lg font-semibold">
-            {group.title}
-          </h3>
-
-          <div className="space-y-2">
-            {group.content.map((bank) => (
-              <button
-                key={`${group.category}-${bank.ifsc}`}
+    <div className="space-y-5">
+      <div className="relative">
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          placeholder="Search bank..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="h-11 pl-10"
+        />
+      </div>
+      <motion.div layout className="grid gap-3">
+        <AnimatePresence mode="popLayout">
+          {filteredBanks.slice(0, 8).map((bank) => {
+            const selected = selectedBank?.ifsc === bank.ifsc;
+            return (
+              <motion.button
+                key={bank.ifsc}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => handleSelect(bank)}
-                className={`flex w-full items-center gap-3 rounded-lg border p-3 text-left transition hover:bg-gray-50 ${
-                  selectedBank?.ifsc === bank.ifsc
-                    ? "border-blue-500 bg-blue-50"
-                    : "border-gray-200"
-                }`}
+                className={`
+                  group relative flex w-full items-center gap-4
+                  rounded-2xl border p-4 text-left
+                  transition-all
+                  ${
+                    selected
+                      ? "border-primary bg-primary/5 shadow-sm"
+                      : "border-border bg-background hover:border-primary/30 hover:shadow-md"
+                  }
+                `}
               >
-                <Image
-                  src={bank.icon}
-                  alt={bank.name}
-                  className="h-8 w-8 object-contain"
-                />
-
-                <div>
-                  <div className="font-medium">
-                    {bank.name}
-                  </div>
-
-                  <div className="text-sm text-gray-500">
-                    IFSC Prefix: {bank.ifsc}
-                  </div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted">
+                  <Image
+                    src={bank.icon}
+                    alt={bank.name}
+                    width={36}
+                    height={36}
+                    className="object-contain"
+                  />
                 </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      ))}
+                <div className="flex-1">
+                  <h3 className="font-semibold">{bank.name}</h3>
+                  <p className="text-sm text-muted-foreground">
+                    IFSC Prefix: {bank.ifsc}
+                  </p>
+                </div>
+                <AnimatePresence>
+                  {selected && (
+                    <motion.div>
+                      <CheckCircle2 className="h-5 w-5 text-primary" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
+            );
+          })}
+        </AnimatePresence>
+      </motion.div>
+      {filteredBanks.length === 0 && (
+        <motion.div className="rounded-xl border border-dashed p-8 text-center">
+          <p className="text-sm text-muted-foreground">No banks found.</p>
+        </motion.div>
+      )}
     </div>
   );
 }

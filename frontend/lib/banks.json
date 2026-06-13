@@ -1,0 +1,857 @@
+{
+  "banks": [
+    {
+      "title": "Private Sector Banks",
+      "category": "private_sector_banks",
+      "content": [
+        {
+          "name": "Axis Bank Ltd.",
+          "ifsc": "UTIB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_axisbank.png",
+          "branch":""
+        },
+        {
+          "name": "Bandhan Bank Ltd.",
+          "ifsc": "BDBL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_bandhanbank.png",
+          "branch":""
+        },
+        {
+          "name": "CSB Bank Limited",
+          "ifsc": "CSBK",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_csb.png",
+          "branch":""
+        },
+        {
+          "name": "City Union Bank Ltd.",
+          "ifsc": "CIUB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_cityunionbank.png",
+          "branch":""
+        },
+        {
+          "name": "DCB Bank Ltd.",
+          "ifsc": "DCBL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_dcbbank.png",
+          "branch":""
+        },
+        {
+          "name": "Dhanlaxmi Bank Ltd.",
+          "ifsc": "DLXB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_dhanbank.png",
+          "branch":""
+        },
+        {
+          "name": "Federal Bank Ltd.",
+          "ifsc": "FDRL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_federalbank.png",
+          "branch":""
+        },
+        {
+          "name": "HDFC Bank Ltd.",
+          "ifsc": "HDFC",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_hdfcbank.png",
+          "branch":""
+        },
+        {
+          "name": "ICICI Bank Ltd.",
+          "ifsc": "ICIC",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_icicibank.png",
+          "branch":""
+        },
+        {
+          "name": "IndusInd Bank Ltd.",
+          "ifsc": "INDB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_indusind.png",
+          "branch":""
+        },
+        {
+          "name": "IDFC FIRST Bank Limited",
+          "ifsc": "IDFB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_idfcbank.png",
+          "branch":""
+        },
+        {
+          "name": "Jammu & Kashmir Bank Ltd.",
+          "ifsc": "JAKA",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_jkbank.png",
+          "branch":""
+        },
+        {
+          "name": "Karnataka Bank Ltd.",
+          "ifsc": "KARB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_karnatakabank.png",
+          "branch":""
+        },
+        {
+          "name": "Karur Vysya Bank Ltd.",
+          "ifsc": "KVBL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_kvb.png",
+          "branch":""
+        },
+        {
+          "name": "Kotak Mahindra Bank Ltd.",
+          "ifsc": "KKBK",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_kotak.png",
+          "branch":""
+        },
+        {
+          "name": "Nainital Bank Ltd.",
+          "ifsc": "NTBL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_nainitalbank.png",
+          "branch":""
+        },
+        {
+          "name": "RBL Bank Ltd.",
+          "ifsc": "RATN",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_rblbank.png",
+          "branch":""
+        },
+        {
+          "name": "South Indian Bank Ltd.",
+          "ifsc": "SIBL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_southindianbank.png",
+          "branch":""
+        },
+        {
+          "name": "Tamilnad Mercantile Bank Ltd.",
+          "ifsc": "TMBL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_tmb.png",
+          "branch":""
+        },
+        {
+          "name": "YES Bank Ltd.",
+          "ifsc": "YESB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_yesbank.png",
+          "branch":""
+        },
+        {
+          "name": "IDBI Bank Limited",
+          "ifsc": "IBKL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/private_sector_banks/bi_idbi.png",
+          "branch":""
+        }
+      ]
+    },
+    {
+      "title": "Local Area Banks",
+      "category": "lab",
+      "content": [
+        {
+          "name": "Coastal Local Area Bank Ltd.",
+          "ifsc": "COAS",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/local_area_banks/bi_coastalareabank.png",
+          "branch":""
+        },
+        {
+          "name": "Krishna Bhima Samruddhi LAB Ltd.",
+          "ifsc": "KBSX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/local_area_banks/bi_kbsbankindia.png",
+          "branch":""
+        }
+      ]
+    },
+    {
+      "title": "Small Finance Banks",
+      "category": "sfb",
+      "content": [
+        {
+          "name": "Au Small Finance Bank Ltd.",
+          "ifsc": "AUBL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/small_finance_banks/bi_aubank.png",
+          "branch":""
+        },
+        {
+          "name": "Capital Small Finance Bank Ltd.",
+          "ifsc": "CLBL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/small_finance_banks/bi_capitalbank.png",
+          "branch":""
+        },
+        {
+          "name": "Equitas Small Finance Bank Ltd.",
+          "ifsc": "ESFB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/small_finance_banks/bi_equitasbank.png",
+          "branch":""
+        },
+        {
+          "name": "ESAF Small Finance Bank Ltd.",
+          "ifsc": "ESMF",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/small_finance_banks/bi_esafbank.png",
+          "branch":""
+        },
+        {
+          "name": "Suryoday Small Finance Bank Ltd.",
+          "ifsc": "SURY",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/small_finance_banks/bi_suryodaybank.png",
+          "branch":""
+        },
+        {
+          "name": "Ujjivan Small Finance Bank Ltd.",
+          "ifsc": "UJVN",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/small_finance_banks/bi_ujjivansfb.png",
+          "branch":""
+        },
+        {
+          "name": "Utkarsh Small Finance Bank Ltd.",
+          "ifsc": "UTKS",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/small_finance_banks/bi_utkarsh.png",
+          "branch":""
+        },
+        {
+          "name": "North East Small Finance Bank Ltd.",
+          "ifsc": "NESF",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/small_finance_banks/bi_nesfb.png",
+          "branch":""
+        },
+        {
+          "name": "Jana Small Finance Bank Ltd.",
+          "ifsc": "JSFB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/small_finance_banks/bi_janabank.png",
+          "branch":""
+        },
+        {
+          "name": "Shivalik Small Finance Bank Ltd.",
+          "ifsc": "SMCB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/small_finance_banks/bi_shivalikbank.png",
+          "branch":""
+        },
+        {
+          "name": "Unity Small Finance Bank Ltd.",
+          "ifsc": "UNBA",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/small_finance_banks/bi_theunitybank.png",
+          "branch":""
+        }
+      ]
+    },
+    {
+      "title": "Payments Banks",
+      "category": "pb",
+      "content": [
+        {
+          "name": "Airtel Payments Bank Ltd.",
+          "ifsc": "AIRP",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/payments_banks/bi_airtel.png",
+          "branch":""
+        },
+        {
+          "name": "India Post Payments Bank Ltd.",
+          "ifsc": "IPOS",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/payments_banks/bi_ippbonline.png",
+          "branch":""
+        },
+        {
+          "name": "FINO Payments Bank Ltd.",
+          "ifsc": "FINO",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/payments_banks/bi_finobank.png",
+          "branch":""
+        },
+        {
+          "name": "Jio Payments Bank Ltd.",
+          "ifsc": "JIOP",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/payments_banks/bi_jiopaymentsbank.png",
+          "branch":""
+        },
+        {
+          "name": "NSDL Payments Bank Limited",
+          "ifsc": "NSPB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/payments_banks/bi_nsdlbank.png",
+          "branch":""
+        }
+      ]
+    },
+    {
+      "title": "Public Sector Banks",
+      "category": "public_sector_banks",
+      "content": [
+        {
+          "name": "Bank of Baroda",
+          "ifsc": "BARB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/public_sector_banks/bi_bankofbaroda.png",
+          "branch":""
+        },
+        {
+          "name": "Bank of India",
+          "ifsc": "BKID",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/public_sector_banks/bi_bankofindia.png",
+          "branch":""
+        },
+        {
+          "name": "Bank of Maharashtra",
+          "ifsc": "MAHB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/public_sector_banks/bi_bankofmaharashtra.png",
+          "branch":""
+        },
+        {
+          "name": "Canara Bank",
+          "ifsc": "CNRB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/public_sector_banks/bi_canarabank.png",
+          "branch":""
+        },
+        {
+          "name": "Central Bank of India",
+          "ifsc": "CBIN",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/public_sector_banks/bi_centralbankofindia.png",
+          "branch":""
+        },
+        {
+          "name": "Indian Bank",
+          "ifsc": "IDIB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/public_sector_banks/bi_indianbank.png",
+          "branch":""
+        },
+        {
+          "name": "Indian Overseas Bank",
+          "ifsc": "IOBA",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/public_sector_banks/bi_iob.png",
+          "branch":""
+        },
+        {
+          "name": "Punjab & Sind Bank",
+          "ifsc": "PSIB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/public_sector_banks/bi_punjabandsindbank.png",
+          "branch":""
+        },
+        {
+          "name": "Punjab National Bank",
+          "ifsc": "PUNB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/public_sector_banks/bi_pnbindia.png",
+          "branch":" "
+        },
+        {
+          "name": "State Bank of India",
+          "ifsc": "SBIN",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/public_sector_banks/bi_sbi.png",
+          "branch":" "
+        },
+        {
+          "name": "UCO Bank",
+          "ifsc": "UCBA",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/public_sector_banks/bi_ucobank.png",
+          "branch":" "
+        },
+        {
+          "name": "Union Bank of India",
+          "ifsc": "UBIN",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/public_sector_banks/bi_unionbankonline.png",
+          "branch":" "
+        }
+      ]
+    },
+    {
+      "title": "Financial Institutions",
+      "category": "financial_institutions",
+      "content": [
+        {
+          "name": "National Bank for Agriculture and Rural Development",
+          "ifsc": "NBRD",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/financial_institutions/bi_nabard.png",
+          "branch":" "
+        },
+        {
+          "name": "Export-Import Bank of India",
+          "ifsc": "EIBI",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/financial_institutions/bi_eximbankindia.png",
+          "branch":" "
+        },
+        {
+          "name": "National Housing Bank",
+          "ifsc": "[NA]",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/financial_institutions/bi_nhb.png",
+          "branch":" "
+        },
+        {
+          "name": "Small Industries Development Bank of India",
+          "ifsc": "SIDB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/financial_institutions/bi_sidbi.png",
+          "branch":" "
+        }
+      ]
+    },
+    {
+      "title": "Regional Rural Banks",
+      "category": "rrb",
+      "content": [
+        {
+          "name": "Assam Gramin Vikash Bank",
+          "ifsc": "AGVX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_agvbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Andhra Pradesh Grameena Vikas Bank",
+          "ifsc": "APGV",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_apgvbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Andhra Pragathi Grameena Bank",
+          "ifsc": "APGB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_apgb.png",
+          "branch":" "
+        },
+        {
+          "name": "Arunachal Pradesh Rural Bank",
+          "ifsc": "APRX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_apruralbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Ellaquai Dehati Bank",
+          "ifsc": "EDBX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_edb.png",
+          "branch":" "
+        },
+        {
+          "name": "Himachal Pradesh Gramin Bank",
+          "ifsc": "HMBX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_hpgb.png",
+          "branch":" "
+        },
+        {
+          "name": "J&K Grameen Bank",
+          "ifsc": "XJKG",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_jkgb.png",
+          "branch":" "
+        },
+        {
+          "name": "Jharkhand Rajya Gramin Bank",
+          "ifsc": "VGBX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_jrgb.png",
+          "branch":" "
+        },
+        {
+          "name": "Karnataka Gramin Bank",
+          "ifsc": "PKGB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_karnatakagraminbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Karnataka Vikas Gramin Bank",
+          "ifsc": "KVGB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_kvgbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Kerala Gramin Bank",
+          "ifsc": "KLGB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_keralagbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Madhya Pradesh Gramin Bank",
+          "ifsc": "CMPX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_mpgb.png",
+          "branch":" "
+        },
+        {
+          "name": "Madhyanchal Gramin Bank",
+          "ifsc": "MADX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_mgbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Maharashtra Gramin Bank",
+          "ifsc": "MAHG",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_mahagramin.png",
+          "branch":" "
+        },
+        {
+          "name": "Manipur Rural Bank",
+          "ifsc": "MRBX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_manipurruralbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Meghalaya Rural Bank",
+          "ifsc": "MERX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_meghalayaruralbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Mizoram Rural Bank",
+          "ifsc": "MZRX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_mizoramruralbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Nagaland Rural Bank",
+          "ifsc": "NAGX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_nagalandruralbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Odisha Gramya Bank",
+          "ifsc": "ODGB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_odishabank.png",
+          "branch":" "
+        },
+        {
+          "name": "Paschim Banga Gramin Bank",
+          "ifsc": "PASX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_pbgbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Prathama U.P. Gramin Bank",
+          "ifsc": "SUBX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_prathamaupbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Puduvai Bharathiar Grama Bank",
+          "ifsc": "PBGX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_puduvaibharathiargramabank.png",
+          "branch":" "
+        },
+        {
+          "name": "Punjab Gramin Bank",
+          "ifsc": "PUGX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_pgb.png",
+          "branch":" "
+        },
+        {
+          "name": "Rajasthan Marudhara Gramin Bank",
+          "ifsc": "RMGB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_rmgb.png",
+          "branch":" "
+        },
+        {
+          "name": "Saptagiri Grameena Bank",
+          "ifsc": "SPBX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_saptagirigrameenabank.png",
+          "branch":" "
+        },
+        {
+          "name": "Sarva Haryana Gramin Bank",
+          "ifsc": "HGBX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_shgb.png",
+          "branch":" "
+        },
+        {
+          "name": "Saurashtra Gramin Bank",
+          "ifsc": "SGBA",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_sgbrrb.png",
+          "branch":" "
+        },
+        {
+          "name": "Tamil Nadu Grama Bank",
+          "ifsc": "IDIB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_tamilnadugramabank.png",
+          "branch":" "
+        },
+        {
+          "name": "Telangana Grameena Bank",
+          "ifsc": "DGBX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_tgbhyd.png",
+          "branch":" "
+        },
+        {
+          "name": "Tripura Gramin Bank",
+          "ifsc": "TGBX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_tripuragraminbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Uttar Bihar Gramin Bank",
+          "ifsc": "UBGX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_ubgb.png",
+          "branch":" "
+        },
+        {
+          "name": "Utkal Grameen Bank",
+          "ifsc": "UGBX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_utkalgrameenbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Uttarbanga Kshetriya Gramin Bank",
+          "ifsc": "UKGX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_ubkgb.png",
+          "branch":" "
+        },
+        {
+          "name": "Vidharbha Konkan Gramin Bank",
+          "ifsc": "BKID",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_vkgb.png",
+          "branch":" "
+        },
+        {
+          "name": "Uttarakhand Gramin Bank",
+          "ifsc": "UTGX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/regional_rural_banks/bi_uttarakhandgraminbank.png",
+          "branch":" "
+        }
+      ]
+    },
+    {
+      "title": "Foreign Banks",
+      "category": "foreign_banks",
+      "content": [
+        {
+          "name": "AB Bank Ltd.",
+          "ifsc": "ABBL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_abbl.png",
+          "branch":" "
+        },
+        {
+          "name": "American Express Banking Corporation",
+          "ifsc": "XXXX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_americanexpress.png",
+          "branch":" "
+        },
+        {
+          "name": "Australia and New Zealand Banking Group Ltd.",
+          "ifsc": "ANZB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_anz.png",
+          "branch":" "
+        },
+        {
+          "name": "Barclays Bank Plc.",
+          "ifsc": "BARC",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_barclays.png",
+          "branch":" "
+        },
+        {
+          "name": "Bank of America",
+          "ifsc": "BOFA",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_bofa-india.png",
+          "branch":" "
+        },
+        {
+          "name": "Bank of Bahrain & Kuwait B.S.C.",
+          "ifsc": "BBKM",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_bbkindia.png",
+          "branch":" "
+        },
+        {
+          "name": "Bank of Ceylon",
+          "ifsc": "BCEY",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_bankofceylon.png",
+          "branch":" "
+        },
+        {
+          "name": "Bank of China",
+          "ifsc": "BCHN",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_bankofchina.png",
+          "branch":" "
+        },
+        {
+          "name": "Bank of Nova Scotia",
+          "ifsc": "NOSC",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_scotiabank.png",
+          "branch":" "
+        },
+        {
+          "name": "BNP Paribas",
+          "ifsc": "BNPA",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_bnpparibas.png",
+          "branch":" "
+        },
+        {
+          "name": "Citibank N.A.",
+          "ifsc": "CITI",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_citibank.png",
+          "branch":" "
+        },
+        {
+          "name": "Cooperatieve Rabobank U.A./ Coöperatieve Centrale Raiffeisen-Boerenleenbank B.A.",
+          "ifsc": "RABO",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_rabobank.png",
+          "branch":" "
+        },
+        {
+          "name": "Credit Agricole Corporate & Investment Bank",
+          "ifsc": "CRLY",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_ca-cib.png",
+          "branch":" "
+        },
+        {
+          "name": "Credit Suisse AG",
+          "ifsc": "CRES",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_credit-suisse.png",
+          "branch":" "
+        },
+        {
+          "name": "CTBC Bank Co., Ltd.",
+          "ifsc": "CTCB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_chinatrustindia.png",
+          "branch":" "
+        },
+        {
+          "name": "DBS Bank India Limited",
+          "ifsc": "DBSS",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_dbs.png",
+          "branch":" "
+        },
+        {
+          "name": "Deutsche Bank A.G.",
+          "ifsc": "DEUT",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_deutschebank.png",
+          "branch":" "
+        },
+        {
+          "name": "Doha Bank Q.P.S.C",
+          "ifsc": "DOHB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_dohabank.png",
+          "branch":" "
+        },
+        {
+          "name": "Emirates NBD Bank PJSC",
+          "ifsc": "EBIL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_emiratesnbd.png",
+          "branch":" "
+        },
+        {
+          "name": "First Abu Dhabi Bank PJSC",
+          "ifsc": "NBAD",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_bankfab.png",
+          "branch":" "
+        },       
+        {
+          "name": "FirstRand Bank Limited",
+          "ifsc": "FIRN",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_firstrand.png",
+          "branch":" "
+        },
+        {
+          "name": "Hong Kong and Shanghai Banking Corporation Limited",
+          "ifsc": "HSBC",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_hsbc.png",
+          "branch":" "
+        },
+        {
+          "name": "Industrial & Commercial Bank of China Ltd.",
+          "ifsc": "ICBK",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_icbcindia.png",
+          "branch":" "
+        },
+        {
+          "name": "Industrial Bank of Korea",
+          "ifsc": "IBKO",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_globalibk.png",
+          "branch":" "
+        },
+        {
+          "name": "J.P. Morgan Chase Bank N.A.",
+          "ifsc": "CHAS",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_jpmorgan.png",
+          "branch":" "
+        },
+        {
+          "name": "JSC VTB Bank",
+          "ifsc": "IBKL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_vtbindia.png",
+          "branch":" "
+        },
+        {
+          "name": "KEB Hana Bank",
+          "ifsc": "KOEX",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_1qbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Kookmin Bank",
+          "ifsc": "KBKB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_kbfg.png",
+          "branch":" "
+        },
+        {
+          "name": "Krung Thai Bank Public Co. Ltd.",
+          "ifsc": "KRTH",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_krungthai.png",
+          "branch":" "
+        },
+        {
+          "name": "Mashreq bank PSC",
+          "ifsc": "MSHQ",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_mashreqbank.png",
+          "branch":" "
+        },        
+        {
+          "name": "Mizuho Bank Ltd.",
+          "ifsc": "MHCB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_mizuhobank.png",
+          "branch":" "
+        },
+        {
+          "name": "MUFG Bank, Ltd.",
+          "ifsc": "BOTM",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_mufg.png",
+          "branch":" "
+        },
+        {
+          "name": "NatWest Markets Plc",
+          "ifsc": "ABNA",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_natwestmarkets.png",
+          "branch":" "
+        },
+        {
+          "name": "PT Bank Maybank Indonesia TBK",
+          "ifsc": "IBBK",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_maybank.png",
+          "branch":" "
+        },
+        {
+          "name": "Qatar National Bank (Q.P.S.C.)",
+          "ifsc": "QNBA",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_qnb.png",
+          "branch":" "
+        },
+        {
+          "name": "Sberbank",
+          "ifsc": "SABR",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_sberbank.png",
+          "branch":" "
+        },
+        {
+          "name": "SBM Bank (India) Limited",
+          "ifsc": "STCB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_sbmbank.png",
+          "branch":" "
+        },
+        {
+          "name": "Shinhan Bank",
+          "ifsc": "SHBK",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_shinhanglobal.png",
+          "branch":" "
+        },
+        {
+          "name": "Societe Generale India",
+          "ifsc": "SOGE",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_societegenerale.png",
+          "branch":" "
+        },
+        {
+          "name": "Sonali Bank Ltd.",
+          "ifsc": "SBLD",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_sonalibank.png",
+          "branch":" "
+        },
+        {
+          "name": "Standard Chartered Bank",
+          "ifsc": "SCBL",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_sc.png",
+          "branch":" "
+        },
+        {
+          "name": "Sumitomo Mitsui Banking Corporation",
+          "ifsc": "SMBC",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_smbc.png",
+          "branch":" "
+        },
+        {
+          "name": "United Overseas Bank Limited",
+          "ifsc": "UOVB",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_uobgroup.png",
+          "branch":" "
+        },
+        {
+          "name": "Woori Bank",
+          "ifsc": "HVBK",
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_wooribank.png",
+          "branch":" "
+        }
+      ]
+    }
+  ]
+}
+

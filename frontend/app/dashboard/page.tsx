@@ -1,13 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
-
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@base-ui/react";
-
 import {
   Card,
   CardContent,
@@ -21,6 +18,7 @@ import { api } from "@/lib/api";
 import { Account } from "@/components/account";
 import { UserAccountCard } from "@/components/userAccountCard";
 import QRCode from "@/components/userQR";
+import { Setting } from "@/components/setting";
 
 const transactions = [
   {
@@ -88,7 +86,6 @@ function DashboardSkeleton() {
         {/* Balance Card */}
         <Skeleton className="h-32 w-full rounded-xl" />
 
-
         <div className="flex gap-4">
           {[1, 2, 3].map((item) => (
             <Skeleton
@@ -146,26 +143,17 @@ export default function DashboardPage() {
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(filter.toLowerCase()),
   );
-
-  const handleLogOut = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    window.location.href = "/signin";
-  };
-
   if (loading) {
     return <DashboardSkeleton />;
   }
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <QRCode userId="cmpvhurgc00009dmwtokl83t3" />
+      {/* <QRCode userId="cmpvhurgc00009dmwtokl83t3" /> */}
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-6">
         <header className="flex flex-col gap-4 border-b pb-5 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <Link href="/" className="text-xl font-semibold">
+          <div className="text-xl font-semibold">
               MoneyPay
-            </Link>
             <p className="mt-1 text-sm text-muted-foreground">
               Dashboard overview for users and transactions.
             </p>
@@ -173,19 +161,13 @@ export default function DashboardPage() {
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
-
-            <Link href="/">
-              <Button variant="outline">Home</Button>
-            </Link>
-
             <Button>{name?.name}</Button>
-
-            <Button onClick={handleLogOut}>Logout</Button>
+              <Setting></Setting>
           </div>
         </header>
-        <div className="ml-240">
-          <Account />
-        </div>
+        <Button className="w-30 h-10 bg-neutral-800">
+          <Account></Account>
+        </Button>
         <div className="flex gap-4 overflow-x-auto px-2">
           {accounts.map((account) => (
             <UserAccountCard
