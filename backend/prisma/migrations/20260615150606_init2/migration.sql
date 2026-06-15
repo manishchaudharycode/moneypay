@@ -4,6 +4,9 @@ CREATE TABLE "user" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
+    "upiID" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
@@ -13,10 +16,12 @@ CREATE TABLE "account" (
     "id" TEXT NOT NULL,
     "bankName" TEXT NOT NULL,
     "branch" TEXT NOT NULL,
-    "image" TEXT NOT NULL,
+    "icon" TEXT NOT NULL,
     "accountNumber" TEXT NOT NULL,
     "balance" INTEGER NOT NULL DEFAULT 10000,
     "userId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "account_pkey" PRIMARY KEY ("id")
 );
@@ -27,6 +32,8 @@ CREATE TABLE "transaction" (
     "amount" INTEGER NOT NULL,
     "senderId" TEXT NOT NULL,
     "recieverId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "transaction_pkey" PRIMARY KEY ("id")
 );

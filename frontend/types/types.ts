@@ -1,6 +1,6 @@
 export interface IBANK {
-  bankName: string;
-  image: string;
-  branch: string;
   id: number;
-} 
+  bankName: string;
+  icon: string;
+  branch: string;
+}

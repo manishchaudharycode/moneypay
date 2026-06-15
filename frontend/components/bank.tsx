@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, CheckCircle2 } from "lucide-react";
-
 import { Bank, getIndianBanks } from "@/lib/bank";
 import { Input } from "@/components/ui/input";
 
@@ -18,16 +17,13 @@ export function Banks({ onSelect }: BanksProps) {
   const banks = React.useMemo(() => getIndianBanks(), []);
   const filteredBanks = React.useMemo(() => {
     const q = query.toLowerCase().trim();
-
     if (!q) return banks;
-
     return banks.filter(
       (bank) =>
         bank.name.toLowerCase().includes(q) ||
         bank.ifsc.toLowerCase().includes(q),
     );
   }, [banks, query]);
-
   const handleSelect = (bank: Bank) => {
     setSelectedBank(bank);
     onSelect?.(bank);

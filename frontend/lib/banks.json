@@ -817,38 +817,32 @@
         {
           "name": "Societe Generale India",
           "ifsc": "SOGE",
-          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_societegenerale.png",
-          "branch":" "
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_societegenerale.png"
         },
         {
           "name": "Sonali Bank Ltd.",
           "ifsc": "SBLD",
-          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_sonalibank.png",
-          "branch":" "
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_sonalibank.png"
         },
         {
           "name": "Standard Chartered Bank",
           "ifsc": "SCBL",
-          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_sc.png",
-          "branch":" "
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_sc.png"
         },
         {
           "name": "Sumitomo Mitsui Banking Corporation",
           "ifsc": "SMBC",
-          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_smbc.png",
-          "branch":" "
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_smbc.png"
         },
         {
           "name": "United Overseas Bank Limited",
           "ifsc": "UOVB",
-          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_uobgroup.png",
-          "branch":" "
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_uobgroup.png"
         },
         {
           "name": "Woori Bank",
           "ifsc": "HVBK",
-          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_wooribank.png",
-          "branch":" "
+          "icon": "https://cdn.jsdelivr.net/npm/banks-in-india@0.3.1/icons/foreign_banks/bi_wooribank.png"
         }
       ]
     }

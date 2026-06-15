@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -63,10 +63,11 @@ type User = {
 
 interface AccountType {
   id: string;
-  image: string;
+  icon: string;
   accountNumber: string;
   bankName: string;
   branch: string;
+  key: string;
 }
 
 function DashboardSkeleton() {
@@ -153,27 +154,31 @@ export default function DashboardPage() {
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-6">
         <header className="flex flex-col gap-4 border-b pb-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-xl font-semibold">
-              MoneyPay
+            MoneyPay
             <p className="mt-1 text-sm text-muted-foreground">
               Dashboard overview for users and transactions.
             </p>
           </div>
-
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <Button>{name?.name}</Button>
+            <Button className="text-neutral-100 bg-neutral-800">
+              {name?.name}
+            </Button>
+            <div className="bg-neutral-800 rounded-xl">
               <Setting></Setting>
+            </div>
           </div>
         </header>
-        <Button className="w-30 h-10 bg-neutral-800">
+        <Button className="w-30 h-10 bg-neutral-800 ml-230">
           <Account></Account>
         </Button>
         <div className="flex gap-4 overflow-x-auto px-2">
           {accounts.map((account) => (
             <UserAccountCard
               key={account.id}
-              id={account.id}
-              image={account.image}
+             id={account.id}
+              accountId={account.id}
+              icon={account.icon}
               bankName={account.bankName}
               branch={account.branch}
               accountNumber={account.accountNumber}

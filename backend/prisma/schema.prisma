@@ -31,7 +31,7 @@ model account {
   id            String @id @default(cuid())
   bankName      String
   branch        String
-  image         String
+  icon          String
   accountNumber String @unique
   balance       Int    @default(10000)
   userId        String

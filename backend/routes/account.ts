@@ -105,9 +105,9 @@ accountRouter.post("/", authMiddleware, async (req, res) => {
       });
     }
 
-    const { bankName, branch, image, accountNumber } = req.body;
+    const { bankName, branch, icon, accountNumber } = req.body;
 
-    if (!bankName || !branch || !image || !accountNumber) {
+    if (!bankName || !branch || !icon || !accountNumber) {
       return res.status(400).json({
         success: false,
         message: "All required fields are mandatory",
@@ -130,7 +130,7 @@ accountRouter.post("/", authMiddleware, async (req, res) => {
         bankName,
         branch,
         accountNumber,
-        image,
+        icon,
         userId,
       },
     });
@@ -163,7 +163,7 @@ accountRouter.put("/:accountId", async (req, res) => {
         message: "Unauthorized",
       });
     }
-    const { bankName, branch, image, accountNumber } = req.body;
+    const { bankName, branch, icon, accountNumber } = req.body;
     const account = await prisma.account.findFirst({
       where: {
         id: accountId,
@@ -202,7 +202,7 @@ accountRouter.put("/:accountId", async (req, res) => {
       data: {
         ...(bankName !== undefined && { bankName }),
         ...(branch !== undefined && { branch }),
-        ...(image !== undefined && { image }),
+        ...(icon !== undefined && { icon }),
         ...(accountNumber !== undefined && { accountNumber }),
       },
     });
@@ -232,7 +232,7 @@ accountRouter.get("/all", async (req, res) => {
       name: acc.bankName,
       branch: acc.branch,
       accountNumber: "**** **** " + acc.accountNumber.slice(8, 12),
-      image: acc.image,
+      icon: acc.icon,
     }));
 
     return res.json({
@@ -268,7 +268,7 @@ accountRouter.get("/detail/:id", authMiddleware, async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      account
+      account,
     });
   } catch (error) {
     console.error(error);

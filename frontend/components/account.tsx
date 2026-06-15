@@ -96,7 +96,7 @@ export function Account() {
       await api.post("/account", {
         bankName: selectedBank.name,
         branch: "main branch",
-        image: selectedBank.icon,
+        icon: selectedBank.icon,
         accountNumber,
       });
 
