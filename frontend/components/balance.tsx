@@ -44,7 +44,7 @@ export function TotalBalance({
   }
 
   return (
-    <div className="p-12">
+    <div className="p-6 max-w-max ">
       <div className="flex gap-2 font-semibold">
         <p>Balance:</p>
         <h2 className="text-2xl font-bold">
@@ -52,8 +52,7 @@ export function TotalBalance({
         </h2>
       </div>
 
-      <div className=" flex gap-2 font-semibold">
-        <p>Acc.Number:</p>
+      <div className=" flex gap-2 mt-5 font-semibold">
         <h2 className="text-2xl font-bold">{maskedAccountNumber}</h2>
       </div>
     </div>

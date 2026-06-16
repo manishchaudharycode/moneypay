@@ -221,6 +221,37 @@ accountRouter.put("/:accountId", async (req, res) => {
     });
   }
 });
+accountRouter.get("/balance", async (req, res) => {
+  try {
+    const userId = req.userId;
+
+    const account = await prisma.account.findFirst({
+      where: {
+        userId,
+      },
+      select: {
+        balance: true,
+      },
+    });
+
+    if (!account) {
+      return res.status(404).json({
+        success: false,
+        message: "Account not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      balance: account.balance,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+});
 
 accountRouter.get("/all", async (req, res) => {
   const userId = req.userId;
